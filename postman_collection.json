@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "PlugListing API",
+    "_postman_id": "pluglisting-api-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://YOUR-RENDER-SERVICE.onrender.com"
+    },
+    {
+      "key": "token",
+      "value": "REPLACE_WITH_TOKEN"
+    },
+    {
+      "key": "property_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Obtain API token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"YOUR_USERNAME\",\"password\":\"YOUR_PASSWORD\"}"
+        },
+        "url": "{{base_url}}/api-token-auth/"
+      }
+    },
+    {
+      "name": "List properties",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/properties/"
+      }
+    },
+    {
+      "name": "Property detail",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/properties/{{property_id}}/"
+      }
+    },
+    {
+      "name": "Create property (auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Sunny apartment\",\"description\":\"Bright two-bedroom apartment.\",\"property_type\":\"apartment\",\"status\":\"available\",\"price\":\"2500000.00\",\"address\":\"12 Example Road\",\"city\":\"Lagos\",\"bedrooms\":2,\"bathrooms\":2,\"area_sq_m\":95}"
+        },
+        "url": "{{base_url}}/api/properties/"
+      }
+    },
+    {
+      "name": "Update property (auth)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\":\"rented\"}"
+        },
+        "url": "{{base_url}}/api/properties/{{property_id}}/update/"
+      }
+    },
+    {
+      "name": "Delete property (auth)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/properties/{{property_id}}/delete/"
+      }
+    }
+  ]
+}

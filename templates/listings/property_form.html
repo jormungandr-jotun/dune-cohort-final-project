@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} — PlugListing{% endblock %}
+{% block content %}<div class="narrow"><p class="eyebrow">PROPERTY MANAGEMENT</p><h1>{{ page_title }}</h1><form class="form-card" method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button class="button full" type="submit">Save listing</button></form></div>{% endblock %}

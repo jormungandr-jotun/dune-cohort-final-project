@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}My dashboard — PlugListing{% endblock %}
+{% block content %}<div class="section-heading"><div><p class="eyebrow">YOUR SPACE</p><h1>My listings</h1></div><a class="button" href="{% url 'property_create' %}">+ Add property</a></div>
+<div class="dashboard-list">{% for property in properties %}<article class="dashboard-item"><div><h3><a href="{{ property.get_absolute_url }}">{{ property.title }}</a></h3><p class="muted">{{ property.city }} · {{ property.get_status_display }} · ₦{{ property.price|floatformat:0 }}</p></div><div class="actions"><a href="{% url 'property_update' property.pk %}">Edit</a><a class="danger-link" href="{% url 'property_delete' property.pk %}">Delete</a></div></article>{% empty %}<div class="empty-state">You have not listed a property yet. <a href="{% url 'property_create' %}">Create your first listing</a>.</div>{% endfor %}</div>{% endblock %}

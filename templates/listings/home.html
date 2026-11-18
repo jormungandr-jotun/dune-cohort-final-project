@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}PlugListing — Find a place to call home{% endblock %}
+{% block content %}
+<section class="hero"><p class="eyebrow">PROPERTY SEARCH, MADE SIMPLE</p><h1>Find a place<br>that feels like <em>yours.</em></h1><p class="hero-copy">Explore homes, compare details and connect directly with property owners.</p>
+<form class="search-form" action="{% url 'property_list' %}" method="get"><input name="q" placeholder="Search by property, address or city"><button class="button" type="submit">Search properties</button></form>
+</section>
+<section class="section-heading"><div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Latest properties</h2></div><a href="{% url 'property_list' %}">View all listings →</a></section>
+<div class="property-grid">{% for property in featured %}<article class="property-card">
+<a href="{{ property.get_absolute_url }}">{% if property.cover_image %}<img src="{{ property.cover_image.url }}" alt="{{ property.title }}">{% else %}<div class="image-placeholder">PlugListing</div>{% endif %}</a>
+<div class="card-body"><span class="tag">{{ property.get_property_type_display }}</span><h3><a href="{{ property.get_absolute_url }}">{{ property.title }}</a></h3><p class="muted">{{ property.city }} · {{ property.bedrooms }} bed · {{ property.bathrooms }} bath</p><strong class="price">₦{{ property.price|floatformat:0 }}</strong></div></article>
+{% empty %}<div class="empty-state">No properties yet. Be the first to <a href="{% url 'register' %}">create a listing</a>.</div>{% endfor %}</div>
+{% endblock %}

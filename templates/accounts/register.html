@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Create account — PlugListing{% endblock %}
+{% block content %}<div class="narrow"><p class="eyebrow">JOIN PLUGLISTING</p><h1>Create your account</h1><form class="form-card" method="post">{% csrf_token %}{{ form.as_p }}<button class="button full">Create account</button></form><p>Already registered? <a href="{% url 'login' %}">Log in</a>.</p></div>{% endblock %}
