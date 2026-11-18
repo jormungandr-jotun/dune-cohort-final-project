@@ -1,6 +1,6 @@
 # PlugListing — Property Listing Platform
 
-**Live demo:** [https://YOUR-RENDER-SERVICE.onrender.com](https://YOUR-RENDER-SERVICE.onrender.com)  
+**Live demo:** [https://dune-cohort-final-project-ltyv.onrender.com/]  
 **Deployment note:** Replace this placeholder with the actual public HTTPS URL after deploying the project to Render. This source package has not been deployed, so no live URL is being claimed.
 
 PlugListing is a property discovery and listing application built with Django. Property owners can publish and manage listings; visitors can browse and search available homes, inspect property details, and registered users can send inquiries and save properties.
@@ -53,54 +53,6 @@ dune-cohort-final-project/
     └── screenshots/
 ```
 
-## Local setup
-
-1. Clone the repository and enter the project directory:
-
-   ```bash
-   git clone https://github.com/YOUR-GITHUB-USERNAME/dune-cohort-final-project.git
-   cd dune-cohort-final-project/pluglisting
-   ```
-
-2. Create and activate a virtual environment:
-
-   ```bash
-   python -m venv .venv
-   # macOS/Linux
-   source .venv/bin/activate
-   # Windows PowerShell
-   .venv\Scripts\Activate.ps1
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Create your local environment file:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Set a unique `SECRET_KEY`. For local development, `DEBUG=True` is acceptable. Leave `DATABASE_URL` blank to use the local SQLite database, or provide a PostgreSQL URL.
-
-5. Apply migrations and create an administrator:
-
-   ```bash
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
-
-6. Run the development server:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-   Visit `http://127.0.0.1:8000/`.
-
 ## Environment variables
 
 | Variable | Purpose |
@@ -126,42 +78,6 @@ See [api_docs.md](api_docs.md). The included [Postman collection](postman_collec
 | DELETE | `/api/properties/{id}/delete/` | Yes | 204 |
 
 Invalid input returns 400; missing or inaccessible records return 404.
-
-## Render deployment
-
-1. Push this repository to a public GitHub repository named `dune-cohort-final-project`.
-2. In Render, create a managed PostgreSQL database and copy its **internal** connection URL.
-3. Create a new **Web Service** connected to the GitHub repository. Set the root directory to `pluglisting`.
-4. Build command: `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate`
-5. Start command: `gunicorn project_config.wsgi:application`
-6. Add environment variables:
-   - `SECRET_KEY`: generated production secret
-   - `DEBUG`: `False`
-   - `DATABASE_URL`: Render PostgreSQL internal URL
-   - `ALLOWED_HOSTS`: your Render hostname, e.g. `your-service.onrender.com`
-   - `CSRF_TRUSTED_ORIGINS`: `https://your-service.onrender.com`
-7. Deploy, then create a superuser from the Render shell using `python manage.py createsuperuser`.
-8. Open the HTTPS service URL, test registration and listing workflows, and update the Live demo URL at the top of this README.
-
-The application settings use PostgreSQL whenever `DATABASE_URL` is set and enable secure cookies and HTTPS proxy handling when `DEBUG=False`.
-
-## Screenshots
-
-Place real browser and Postman screenshots in `screenshots/` and embed them here before submission:
-
-- `screenshots/homepage.png` — home page
-- `screenshots/property-detail.png` — property detail page
-- `screenshots/dashboard.png` — owner dashboard
-- `screenshots/postman-list.png` — successful API list response
-- `screenshots/postman-create.png` — authenticated API create response
-
-Example Markdown once screenshots have been added:
-
-```md
-![PlugListing homepage](screenshots/homepage.png)
-```
-
-No screenshots are fabricated or included in this starter package.
 
 ## Future improvements
 
